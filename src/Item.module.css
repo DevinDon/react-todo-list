@@ -4,10 +4,10 @@
   justify-content : space-between;
   align-items     : center;
   padding         : 8px;
-  background-color: #ecf0f1;
-  color           : #2c3e50;
+  background-color: #fff;
+  color           : #2f3542;
   margin          : 8px 0;
-  border-radius   : 4px;
+  border-radius   : 2px;
   cursor          : pointer;
 }
 
