@@ -32,7 +32,7 @@ export function App() {
     <div className={styles.page}>
       <div className={styles.container}>
         <Input />
-        <div className="list">
+        <div className={styles.list}>
           {todos.map(todo => <Item key={todo.time} {...todo}></Item>)}
         </div>
       </div>
