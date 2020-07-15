@@ -2,11 +2,16 @@ import { CheckCircleOutlined, CloseCircleOutlined, LoadingOutlined } from '@ant-
 import React from 'react';
 import styles from './Item.module.css';
 
-export function Item({ title, completed, time, completeTodo, removeTodo }) {
+/**
+ * 组件 `<Item>`
+ * 
+ * @param {Todo & triggerTodo & removeTodo} { title, completed, time, triggerTodo, removeTodo }
+ */
+export function Item({ title, completed, time, triggerTodo, removeTodo }) {
   return (
     <div className={styles.item}>
       <span className={styles.left}>
-        <div className={styles.icon} onClick={() => completeTodo(time)}>
+        <div className={styles.icon} onClick={() => triggerTodo(time)}>
           {completed ? <CheckCircleOutlined /> : <LoadingOutlined />}
         </div>
         <span style={{ textDecoration: completed ? 'line-through' : 'none' }}>{title}</span>
