@@ -18,3 +18,7 @@
 
 - 使用 Bulma 的 CSS 库
 - 使用 AntD 的图标库 `@ant-design/icons`
+
+## 如何使用
+
+`npm start` 启动服务器后，在浏览器中打开 `http://localhost:3000` 即可看到效果。
