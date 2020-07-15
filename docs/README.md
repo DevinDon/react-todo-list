@@ -210,7 +210,7 @@ export default Home;
 
 #### 3.3.3 效果图
 
-![image-20200715100334488](C:\Users\九章\Documents\workspace\personal-app\docs\README.assets\image-20200715100334488.png)
+![image-20200715100334488](./README.assets/image-20200715100334488.png)
 
 ### 3.4 组件 Tabs 标签页
 
@@ -265,7 +265,7 @@ export function Login() {
 
 #### 3.4.3 效果图
 
-![image-20200715103034414](C:\Users\九章\Documents\workspace\personal-app\docs\README.assets\image-20200715103034414.png)
+![image-20200715103034414](./README.assets/image-20200715103034414.png)
 
 ### 3.5 组件 Input 输入框
 
