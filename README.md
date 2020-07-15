@@ -13,3 +13,8 @@
 
 1. 输入框组件 `/src/Input.js`
 2. 待办事项组件 `/src/Item.js`
+
+## 备注
+
+- 使用 Bulma 的 CSS 库
+- 使用 AntD 的图标库 `@ant-design/icons`
