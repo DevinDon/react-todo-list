@@ -85,7 +85,7 @@ export function App() {
       <div className={styles.container}>
         <Input addTodo={addTodo} />
         <div className={styles.list}>
-          {todos.map(todo => <Item key={todo.time} completeTodo={triggerTodo} removeTodo={removeTodo} {...todo}></Item>)}
+          {todos.map(todo => <Item key={todo.time} triggerTodo={triggerTodo} removeTodo={removeTodo} {...todo}></Item>)}
         </div>
       </div>
     </div>
