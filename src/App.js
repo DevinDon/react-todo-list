@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { Input } from './Input'
-import { Item } from './Item'
+import React, { useEffect, useState } from 'react';
 import styles from './App.module.css';
+import { Form } from './Form';
+import { Item } from './Item';
 
 // Todo 的数据结构
 // interface Todo {
@@ -18,7 +18,7 @@ const DEFAULT_TODOS = [
 
 /**
  * 从 local storage 读取待办事件列表
- * 
+ *
  * @returns {Todo[]} todos 返回待办事件列表
  */
 function loadTodosFromLocal() {
@@ -28,9 +28,9 @@ function loadTodosFromLocal() {
 
 /**
  * 将待办事件列表存储到 local storage 中
- * 
+ *
  * @param {Todo[]} todos 待办事件列表
- * 
+ *
  * @returns {void} void
  */
 function saveTodosToLocal(todos) {
@@ -44,21 +44,23 @@ export function App() {
 
   /** 待办事件列表 */
   const [todos, setTodos] = useState(loadTodosFromLocal() || DEFAULT_TODOS);
+  /** 筛选后用于展示的事件列表 */
+  const [filteredTodos, setFilteredTodos] = useState(todos);
 
   /**
    * 新增待办事件, 绑定至 `<Item>` 组件上
-   * 
+   *
    * @param {string} title 待办事件的标题
-   * 
+   *
    * @returns {void} void
    */
   const addTodo = title => setTodos([{ title, completed: false, time: Date.now() }, ...todos]);
 
   /**
    * 更改指定的待办事件状态
-   * 
+   *
    * @param {number} time 待办事件添加的时间, 同时作为 key
-   * 
+   *
    * @returns {void} void
    */
   const triggerTodo = time => setTodos(
@@ -70,9 +72,9 @@ export function App() {
 
   /**
    * 移除指定的待办事件
-   * 
+   *
    * @param {number} time 待办事件提交的时间
-   * 
+   *
    * @returns {void} void
    */
   const removeTodo = time => setTodos(todos.filter(todo => todo.time !== time));
@@ -83,9 +85,13 @@ export function App() {
   return (
     <div className={styles.page}>
       <div className={styles.container}>
-        <Input addTodo={addTodo} />
+        <Form addTodo={addTodo} />
         <div className={styles.list}>
-          {todos.map(todo => <Item key={todo.time} triggerTodo={triggerTodo} removeTodo={removeTodo} {...todo}></Item>)}
+          {
+            todos.map(
+              todo => <Item key={todo.time} triggerTodo={triggerTodo} removeTodo={removeTodo} {...todo} />
+            )
+          }
         </div>
       </div>
     </div>
