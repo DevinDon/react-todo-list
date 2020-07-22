@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export function Form({ todos, setTodos, addTodo }) {
+export function TodoForm({ addTodo, todos, setFilteredTodos }) {
 
   const [value, setValue] = useState('');
 
@@ -11,7 +11,11 @@ export function Form({ todos, setTodos, addTodo }) {
   }
 
   const handleChange = event => {
-    setValue(event.target.value);
+    const current = event.target.value;
+    setValue(current);
+    console.log('search', current);
+    const newTodos = todos.filter(todo => todo.title.includes(current));
+    setFilteredTodos(newTodos);
   };
 
   return (

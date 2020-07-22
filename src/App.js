@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './App.module.css';
-import { Form } from './Form';
 import { Item } from './Item';
+import { TodoForm } from './TodoForm';
 
 // Todo 的数据结构
 // interface Todo {
@@ -44,7 +44,7 @@ export function App() {
 
   /** 待办事件列表 */
   const [todos, setTodos] = useState(loadTodosFromLocal() || DEFAULT_TODOS);
-  /** 筛选后用于展示的事件列表 */
+  /** 筛选后的事件列表 */
   const [filteredTodos, setFilteredTodos] = useState(todos);
 
   /**
@@ -80,15 +80,18 @@ export function App() {
   const removeTodo = time => setTodos(todos.filter(todo => todo.time !== time));
 
   // 当待办事件列表发生变动时, 自动存储至 local storage
-  useEffect(() => saveTodosToLocal(todos), [todos]);
+  useEffect(() => {
+    saveTodosToLocal(todos);
+    setFilteredTodos(todos);
+  }, [todos]);
 
   return (
     <div className={styles.page}>
       <div className={styles.container}>
-        <Form addTodo={addTodo} />
+        <TodoForm addTodo={addTodo} todos={todos} setFilteredTodos={setFilteredTodos} />
         <div className={styles.list}>
           {
-            todos.map(
+            filteredTodos.map(
               todo => <Item key={todo.time} triggerTodo={triggerTodo} removeTodo={removeTodo} {...todo} />
             )
           }
