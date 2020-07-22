@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>防抖与节流的应用</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      margin: 6px 24px;
+      padding: 6px 24px;
+      width: 368px;
+    }
+
+    form {
+      margin: 16px 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    form>* {
+      margin: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>防抖函数的应用</h1>
+    <p>Tips: 观察输出区域的更新频率</p>
+    <form>
+      <label for="undebounce">无防抖，每次输入都会立即更新结果</label>
+      <input id="undebounce" type="text" placeholder="无防抖函数" oninput="input(event)" onblur="reset(event)" />
+    </form>
+    <form>
+      <label for="debounce">有防抖，在停止输入一秒后更新结果</label>
+      <input id="debounce" type="text" placeholder="有防抖函数" oninput="inputWithDebounce(event)" onblur="reset(event)" />
+    </form>
+    <form>
+      <label for="display-debounce">Debounce 结果输出区域</label>
+      <input id="display-debounce" type="text" placeholder="用户输入内容" disabled />
+    </form>
+  </div>
+
+  <div class="container">
+    <h1>节流函数的用法</h1>
+    <p>Tips: 观察输出区域的更新频率</p>
+    <form>
+      <label for="unthrottle">无节流，每次移动鼠标都会更新结果</label>
+      <button id="unthrottle" onclick="toggleToUnthrottle()">点击切换为 非节流 模式</button>
+    </form>
+    <form>
+      <label for="throttle">有节流，移动鼠标后每间隔一秒更新结果</label>
+      <button id="throttle" onclick="toggleToThrottle()">点击切换为 节流 模式</button>
+    </form>
+    <form>
+      <label for="display-throttle">Throttle 结果输出区域</label>
+      <input id="display-throttle" type="text" placeholder="鼠标坐标位置" disabled />
+    </form>
+  </div>
+
+</body>
+
+<script>
+  /**
+   * 防抖函数
+   *
+   * @param {Function} fn 要防抖的函数
+   * @param {number} interval 防抖间隔，即多久没有抖动后才执行函数
+   */
+  function debounce(fn, interval = 300) {
+    let timer;
+    return args => {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn(args), interval);
+    };
+  }
+
+  /**
+   * 节流函数
+   *
+   * @param {Function} fn 要节流的函数
+   * @param {number} delay 节流延迟，即有事件触发时，每隔多长时间执行一次函数
+   */
+  function throttle(fn, delay = 300) {
+    let runnable = true;
+    return args => {
+      if (!runnable) { return; }
+      runnable = false;
+      setTimeout(() => runnable = true, delay);
+      return fn(args);
+    };
+  }
+
+  document.querySelectorAll('form').forEach(form => form.onsubmit = event => event.preventDefault());
+
+  const reset = event => event.target.value = '';
+
+  const input = event => document.getElementById('display-debounce').value = event.target.value;
+  const mouse = event => document.getElementById('display-throttle').value = `${event.screenX}, ${event.screenY}`;
+
+  const inputWithDebounce = debounce(input, 1000);
+  const mouseWithThrottle = throttle(mouse, 1000);
+
+  function toggleToUnthrottle() {
+    document.body.onmousemove = mouse;
+  }
+
+  function toggleToThrottle() {
+    window.document.body.onmousemove = mouseWithThrottle;
+  }
+</script>
+
+</html>
