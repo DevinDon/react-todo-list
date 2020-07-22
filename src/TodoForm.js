@@ -10,8 +10,13 @@ export function TodoForm({ addTodo, todos, setFilteredTodos }) {
     setValue('');
   }
 
-  const search = title => {
-    console.log('search', title);
+  /**
+   * 筛选待办事项
+   *
+   * @param {string} title 待办事项的标题
+   */
+  const filter = title => {
+    console.log('filter', title);
     const newTodos = todos.filter(todo => todo.title.includes(title));
     setFilteredTodos(newTodos);
   }
@@ -19,7 +24,7 @@ export function TodoForm({ addTodo, todos, setFilteredTodos }) {
   const handleChange = event => {
     const current = event.target.value;
     setValue(current);
-    search(current);
+    filter(current);
   };
 
   return (
