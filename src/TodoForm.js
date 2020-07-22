@@ -10,12 +10,16 @@ export function TodoForm({ addTodo, todos, setFilteredTodos }) {
     setValue('');
   }
 
+  const search = title => {
+    console.log('search', title);
+    const newTodos = todos.filter(todo => todo.title.includes(title));
+    setFilteredTodos(newTodos);
+  }
+
   const handleChange = event => {
     const current = event.target.value;
     setValue(current);
-    console.log('search', current);
-    const newTodos = todos.filter(todo => todo.title.includes(current));
-    setFilteredTodos(newTodos);
+    search(current);
   };
 
   return (
