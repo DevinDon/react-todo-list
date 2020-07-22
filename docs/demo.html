@@ -9,15 +9,29 @@
     body {
       margin: 0;
       padding: 0;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
+    h1,
+    p {
+      text-align: center;
+    }
+
     .container {
-      margin: 0 24px;
-      padding: 0 24px;
+      margin: 0 1rem;
+      padding: 0 1rem;
       width: 368px;
+    }
+
+    @media screen and (max-width: 500px) {
+      .container {
+        width: calc(100% - 2rem);
+        margin: 0;
+        padding: 0 1rem;
+      }
     }
 
     form {
@@ -27,7 +41,7 @@
     }
 
     form>* {
-      margin: 4px;
+      margin: 4px 0;
     }
   </style>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/siimple@3.3.1/dist/siimple.min.css">
@@ -37,7 +51,7 @@
 
   <div class="container">
     <h1>防抖函数的应用</h1>
-    <p>Tips: 观察输出区域的更新频率</p>
+    <p>Tips: 输入内容并观察输出区域的更新频率</p>
     <form>
       <label class="siimple-label" for="undebounce">无防抖，每次输入都会立即更新结果</label>
       <input class="siimple-input" id="undebounce" type="text" placeholder="无防抖函数" oninput="input(event)"
@@ -58,18 +72,18 @@
 
   <div class="container">
     <h1>节流函数的用法</h1>
-    <p>Tips: 观察输出区域的更新频率</p>
+    <p>Tips: 移动鼠标 / 触摸屏幕并观察输出区域的更新频率</p>
     <form>
       <label class="siimple-label" for="switch">选择 节流 / 非节流 模式</label>
       <select class="siimple-select siimple-select--fluid" onchange="select(this.value)">
         <option value="unselect" selected>未选择模式</option>
-        <option value="unthrottle">非节流模式</option>
-        <option value="throttle">节流模式</option>
+        <option value="unthrottle">无节流，每次移动鼠标 / 触摸屏幕都会更新结果</option>
+        <option value="throttle">有节流，每次移动鼠标 / 触摸屏幕后，会间隔一定时间再次更新</option>
       </select>
     </form>
     <form>
       <label class="siimple-label" for="display-throttle">Throttle 结果输出区域</label>
-      <input id="display-throttle" type="text" placeholder="鼠标坐标位置" disabled />
+      <input class="siimple-input" id="display-throttle" type="text" placeholder="鼠标坐标位置" disabled />
     </form>
   </div>
 
