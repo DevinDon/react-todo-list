@@ -107,10 +107,10 @@
    * @param {number} interval 防抖间隔，即多久没有抖动后才执行函数
    */
   function debounce(fn, interval = 300) {
-    let timer;
+    let timer = -1;
     return args => {
       clearTimeout(timer);
-      timer = setTimeout(() => fn(args), interval);
+      timer = setTimeout(() => fn(args, this), interval);
     };
   }
 
@@ -126,7 +126,7 @@
       if (!runnable) { return; }
       runnable = false;
       setTimeout(() => runnable = true, delay);
-      return fn(args);
+      return fn(args, this);
     };
   }
 

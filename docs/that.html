@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button onclick="console.log(this)">inline output: button</button>
+  <button onclick="whoIsThis()">function output: window</button>
+  <button onclick="whoIsArrow()">arrow function output: button</button>
+</body>
+
+<script>
+  function whoIsThis() {
+    console.log(this);
+  }
+
+  const whoIsArrow = () => console.log(this);
+</script>
+
+</html>
